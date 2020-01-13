@@ -43,9 +43,10 @@ namespace IdentityServer
                     ClientId = "galaxus",
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
-                    RequirePkce = true,
+                    RequirePkce = false,
                 
                     // where to redirect to after login
                     RedirectUris = { "http://galaxus.local/signin-oidc" },
@@ -64,12 +65,13 @@ namespace IdentityServer
                     ClientId = "digitec",
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
-                    RequirePkce = true,
+                    RequirePkce = false,
                 
                     // where to redirect to after login
-                    RedirectUris = { "http://digitec.local/signin-oidc" },
+                    RedirectUris = { "http://digitec.local/signin-oidc", "http://digitec.local/silent.html" },
 
                     // where to redirect to after logout
                     PostLogoutRedirectUris = { "http://digitec.local/signout-callback-oidc" },

@@ -2,6 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -58,6 +61,28 @@ namespace IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.Use(async (context, next) =>
+            {
+                context.Response.OnStarting(() =>
+                {
+                    context.Response.Headers.Remove("X-Frame-Options");
+                    context.Response.Headers.Remove("Content-Security-Policy");
+                    context.Response.Headers.Remove("X-Content-Security-Policy");
+                    return Task.FromResult(0);
+                });
+
+                await next();
+            });
+
+            app.UseCors(_ =>
+            {
+                _.AllowAnyHeader();
+                _.AllowAnyMethod();
+                _.SetIsOriginAllowedToAllowWildcardSubdomains();
+                _.WithOrigins(GetAllowedDomains().ToArray());
+                _.AllowCredentials();
+            });
 
             app.UseStaticFiles();
             app.UseRouting();
@@ -69,6 +94,16 @@ namespace IdentityServer
             {
                 endpoints.MapDefaultControllerRoute();
             });
+        }
+
+        private List<String> GetAllowedDomains()
+        {
+            var urls = new List<string>()
+            {
+                "http://digitec.local",
+                "http://galaxus.local",                
+            };
+            return urls;
         }
     }
 }

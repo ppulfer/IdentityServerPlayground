@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace MvcClient
@@ -41,7 +42,7 @@ namespace MvcClient
 
                     options.ClientId = configuration.GetValue<string>("CLIENT_ID");
                     options.ClientSecret = "secret";
-                    options.ResponseType = "code";
+                    options.ResponseType = OpenIdConnectResponseType.IdTokenToken;
 
                     options.SaveTokens = true;
                 });

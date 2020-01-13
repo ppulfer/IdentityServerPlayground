@@ -14,17 +14,19 @@ function log() {
     });
 }
 
-document.getElementById("login").addEventListener("click", login, false);
-document.getElementById("api").addEventListener("click", api, false);
-document.getElementById("logout").addEventListener("click", logout, false);
+// document.getElementById("login").addEventListener("click", login, false);
+// document.getElementById("api").addEventListener("click", api, false);
+// document.getElementById("logout").addEventListener("click", logout, false);
 
 var config = {
-    authority: "http://localhost:5000",
-    client_id: "js",
-    redirect_uri: "http://localhost:5003/callback.html",
-    response_type: "code",
-    scope:"openid profile api1",
-    post_logout_redirect_uri : "http://localhost:5003/index.html",
+    authority: "http://identityserver:8888",
+    client_id: "galaxus",
+    redirect_uri: "http://galaxus.local/callback.html",
+    response_type: "id_token token",
+    scope:"openid profile",
+    post_logout_redirect_uri : "http://galaxus.local/",
+    silent_redirect_uri: "http://galaxus.local/silent.html",
+    userStore: new Oidc.WebStorageStateStore({ store: window.localStorage })
 };
 var mgr = new Oidc.UserManager(config);
 
@@ -33,12 +35,22 @@ mgr.getUser().then(function (user) {
         log("User logged in", user.profile);
     }
     else {
+        renewToken();
         log("User not logged in");
     }
 });
 
 function login() {
     mgr.signinRedirect();
+}
+
+function renewToken() {
+    mgr.signinSilent()
+        .then(function () {
+            log("silent renew success");            
+        }).catch(function (err) {
+            log("silent renew error", err);
+        });
 }
 
 function api() {
