@@ -1,0 +1,13 @@
+{
+  "profiles": {    
+    "JavaScriptClient": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CLIENT_ID": "galaxus"
+      },
+      "applicationUrl": "http://localhost:5010"
+    }
+  }
+}

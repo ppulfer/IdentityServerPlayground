@@ -1,0 +1,48 @@
+version: '2'
+ 
+services:
+    identityserver:
+        build: identityserver
+        ports: 
+            - 8888:8888
+        restart: always
+
+    reverse-proxy:
+        build: reverse-proxy
+        ports:
+            - 80:8080
+        restart: always
+
+    galaxus-iso:
+        image: onlineshop-iso
+        depends_on:
+            - reverse-proxy
+        build: onlineshop/iso
+        restart: always
+        environment: 
+            - CLIENT_ID=galaxus        
+ 
+    galaxus-mvc:
+        image: onlineshop-mvc
+        depends_on:
+            - reverse-proxy
+        build: onlineshop/mvc
+        restart: always    
+        environment: 
+            - CLIENT_ID=galaxus    
+ 
+    digitec-iso:
+        image: onlineshop-iso
+        depends_on:
+            - reverse-proxy
+        restart: always
+        environment: 
+            - CLIENT_ID=digitec
+ 
+    digitec-mvc:
+        image: onlineshop-mvc
+        depends_on:
+            - reverse-proxy
+        restart: always
+        environment: 
+            - CLIENT_ID=digitec
