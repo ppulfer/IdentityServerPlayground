@@ -49,7 +49,7 @@ namespace IdentityServer
                     RequirePkce = false,
                 
                     // where to redirect to after login
-                    RedirectUris = { "http://galaxus.local/signin-oidc" },
+                    RedirectUris = { "http://galaxus.local/signin-oidc", "http://galaxus.local/silent.html" },
 
                     // where to redirect to after logout
                     PostLogoutRedirectUris = { "http://galaxus.local/signout-callback-oidc" },

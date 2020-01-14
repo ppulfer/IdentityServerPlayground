@@ -13,6 +13,12 @@ services:
             - 80:8080
         restart: always
 
+    api:
+        build: api
+        ports:
+            - 8020:8020
+        restart: always
+
     galaxus-iso:
         image: onlineshop-iso
         depends_on:

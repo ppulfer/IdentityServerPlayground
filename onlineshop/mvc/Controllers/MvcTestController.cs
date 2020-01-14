@@ -54,6 +54,12 @@ namespace MvcClient.Controllers
             return SignOut("Cookies", "oidc");
         }
 
+        [Authorize]
+        public IActionResult Login()
+        {
+            return Redirect("/");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
