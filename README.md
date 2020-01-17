@@ -6,7 +6,7 @@ Steps to run all Services on your Local Machine:
 * 127.0.0.1 digitec.local
 * 127.0.0.1 galaxus.local
 * 127.0.0.1 identityserver
-* 127.0.0.1 api.local
+* 127.0.0.1 api
 
 2. Run "docker-compose build"
 3. Run "docker-compose up"

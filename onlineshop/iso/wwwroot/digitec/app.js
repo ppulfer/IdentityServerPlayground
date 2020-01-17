@@ -14,16 +14,16 @@ function log() {
     });
 }
 
-// document.getElementById("login").addEventListener("click", login, false);
-// document.getElementById("api").addEventListener("click", api, false);
-// document.getElementById("logout").addEventListener("click", logout, false);
+document.getElementById("login").addEventListener("click", login, false);
+document.getElementById("api").addEventListener("click", api, false);
+document.getElementById("logout").addEventListener("click", logout, false);
 
 var config = {
     authority: "http://identityserver:8888",
     client_id: "digitec",
     redirect_uri: "http://digitec.local/callback.html",
     response_type: "id_token token",
-    scope:"openid profile",
+    scope:"openid profile api1",
     post_logout_redirect_uri : "http://digitec.local/",
     silent_redirect_uri: "http://digitec.local/silent.html",
     userStore: new Oidc.WebStorageStateStore({ store: window.localStorage })
@@ -55,7 +55,7 @@ function login() {
 
 function api() {
     mgr.getUser().then(function (user) {
-        var url = "http://localhost:5001/identity";
+        var url = "http://api:8020/identity";
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);

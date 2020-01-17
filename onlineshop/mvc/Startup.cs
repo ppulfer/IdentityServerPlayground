@@ -39,11 +39,11 @@ namespace MvcClient
                 {                    
                     options.Authority = "http://identityserver:8888";
                     options.RequireHttpsMetadata = false;
+                    options.Scope.Add("api1");
 
                     options.ClientId = configuration.GetValue<string>("CLIENT_ID");
                     options.ClientSecret = "secret";
                     options.ResponseType = OpenIdConnectResponseType.IdTokenToken;
-
                     options.SaveTokens = true;
                 });
         }

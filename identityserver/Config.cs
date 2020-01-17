@@ -49,7 +49,7 @@ namespace IdentityServer
                     RequirePkce = false,
                 
                     // where to redirect to after login
-                    RedirectUris = { "http://galaxus.local/signin-oidc", "http://galaxus.local/silent.html" },
+                    RedirectUris = { "http://galaxus.local/signin-oidc", "http://galaxus.local/silent.html", "http://galaxus.local/callback.html" },
 
                     // where to redirect to after logout
                     PostLogoutRedirectUris = { "http://galaxus.local/signout-callback-oidc" },
@@ -57,7 +57,8 @@ namespace IdentityServer
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
                     }
                 },
                 new Client
@@ -71,7 +72,7 @@ namespace IdentityServer
                     RequirePkce = false,
                 
                     // where to redirect to after login
-                    RedirectUris = { "http://digitec.local/signin-oidc", "http://digitec.local/silent.html" },
+                    RedirectUris = { "http://digitec.local/signin-oidc", "http://digitec.local/silent.html", "http://digitec.local/callback.html" },
 
                     // where to redirect to after logout
                     PostLogoutRedirectUris = { "http://digitec.local/signout-callback-oidc" },
@@ -79,7 +80,8 @@ namespace IdentityServer
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
                     }
                 }
             };
